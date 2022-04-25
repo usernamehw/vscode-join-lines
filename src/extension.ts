@@ -3,28 +3,27 @@ import { joinLines } from './commands/joinLines';
 import { ExtensionConfig } from './types';
 
 export const enum CommandId {
-	joinLines = 'joinLines.joinLines',
-	joinLinesWithSeparator = 'joinLines.joinLinesWithSeparator'
+	joinLinesCommand = 'joinLines.joinLines',
+	joinLinesWithSeparator = 'joinLines.joinLinesWithSeparator',
 }
 
 export const enum Constants {
-	extensionConfigSection = 'joinLines'
+	extensionConfigSection = 'joinLines',
 }
 
 export let $config: ExtensionConfig;
 
 export function activate(context: ExtensionContext) {
-
 	updateConfig();
 
-	context.subscriptions.push(commands.registerTextEditorCommand(CommandId.joinLines, async (editor, edit, ...args) => {
+	context.subscriptions.push(commands.registerTextEditorCommand(CommandId.joinLinesCommand, async (editor, edit, ...args) => {
 		await joinLines(editor, edit, args[0]);
 	}));
-	context.subscriptions.push(commands.registerTextEditorCommand(CommandId.joinLinesWithSeparator, async(editor) => {
+	context.subscriptions.push(commands.registerTextEditorCommand(CommandId.joinLinesWithSeparator, async editor => {
 		const userSeparator = await window.showInputBox({
 			title: 'Enter the separator',
 			value: ' ',
-			valueSelection: [0, 1]
+			valueSelection: [0, 1],
 		});
 		if (userSeparator === undefined) {
 			return;
