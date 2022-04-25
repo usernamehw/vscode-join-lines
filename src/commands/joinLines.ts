@@ -44,8 +44,11 @@ export async function joinLines(editor: TextEditor, edit?: TextEditorEdit, { sep
 				textLines.push(editor.document.lineAt(i));
 			}
 			builder.replace(range, textLines.map((textLine, i) => {
+				if (textLine.isEmptyOrWhitespace) {
+					return '';
+				}
 				return textLine.text.slice(i === 0 ? 0 : textLine.firstNonWhitespaceCharacterIndex);
-			}).join(separator))
+			}).filter(Boolean).join(separator));
 		}
 	});
 }
