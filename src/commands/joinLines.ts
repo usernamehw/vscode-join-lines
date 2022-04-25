@@ -39,10 +39,13 @@ export async function joinLines(editor: TextEditor, edit?: TextEditorEdit, { sep
 
 	await editor.edit(builder => {
 		for (const range of ranges) {
-			const rangeText = editor.document.getText(range);
-			if (rangeText) {
-				builder.replace(range, rangeText.replace(/[\r\n]+/g, String(separator)));
+			const textLines = [];
+			for (let i = range.start.line; i <= range.end.line; i++) {
+				textLines.push(editor.document.lineAt(i));
 			}
+			builder.replace(range, textLines.map((textLine, i) => {
+				return textLine.text.slice(i === 0 ? 0 : textLine.firstNonWhitespaceCharacterIndex);
+			}).join(separator))
 		}
 	});
 }
