@@ -2,7 +2,7 @@
 	"name": "vscode-join-lines",
 	"displayName": "Join Lines",
 	"description": "Join Lines in editor (with custom separator)",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"publisher": "usernamehw",
 	"license": "MIT",
 	"engines": {
