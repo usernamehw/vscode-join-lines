@@ -37,6 +37,16 @@
 					"type": "string",
 					"default": " ",
 					"markdownDescription": "Symbol that is used when joining lines."
+				},
+				"joinLines.wrapLeft": {
+					"type": "string",
+					"default": "",
+					"markdownDescription": "Symbol to wrap the line on the left."
+				},
+				"joinLines.wrapRight": {
+					"type": "string",
+					"default": "",
+					"markdownDescription": "Symbol to wrap the line on the right."
 				}
 			}
 		},

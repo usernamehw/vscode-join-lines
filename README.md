@@ -25,7 +25,9 @@ Join lines by separator specified in settings, keybinding argument or entered by
 	"key": "ctrl+shift+9",
 	"command": "joinLines.joinLines",
 	"args": {
-		"separator": "###"
+		"separator": "###",
+		"wrapLeft": "'",
+		"wrapRight": "'"
 	}
 }
 ```
@@ -41,9 +43,11 @@ Join lines by separator specified in settings, keybinding argument or entered by
 <!-- COMMANDS_END -->
 
 <!-- SETTINGS_START -->
-## Settings (1)
+## Settings (3)
 
 |Setting|Default|Description|
 |-|-|-|
-|joinLines.defaultSeparator|"&nbsp;"|Symbol that is used when joining lines|
+|joinLines.defaultSeparator|"&nbsp;"|Symbol that is used when joining lines.|
+|joinLines.wrapLeft|""|Symbol to wrap the line on the left.|
+|joinLines.wrapRight|""|Symbol to wrap the line on the right.|
 <!-- SETTINGS_END -->

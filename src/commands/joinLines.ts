@@ -1,7 +1,11 @@
 import { Range, TextEditor, TextEditorEdit } from 'vscode';
 import { $config } from '../extension';
 
-export async function joinLines(editor: TextEditor, edit?: TextEditorEdit, { separator = $config.defaultSeparator } = {}) {
+export async function joinLines(editor: TextEditor, edit?: TextEditorEdit, {
+	separator = $config.defaultSeparator,
+	wrapLeft = $config.wrapLeft,
+	wrapRight = $config.wrapRight,
+} = {}) {
 	const allSelectedLines: number[] = [];
 
 	for (const selection of editor.selections) {
@@ -47,7 +51,7 @@ export async function joinLines(editor: TextEditor, edit?: TextEditorEdit, { sep
 				if (textLine.isEmptyOrWhitespace) {
 					return '';
 				}
-				return textLine.text.slice(i === 0 ? 0 : textLine.firstNonWhitespaceCharacterIndex);
+				return `${wrapLeft}${textLine.text.slice(i === 0 ? 0 : textLine.firstNonWhitespaceCharacterIndex)}${wrapRight}`;
 			}).filter(Boolean).join(separator));
 		}
 	});
