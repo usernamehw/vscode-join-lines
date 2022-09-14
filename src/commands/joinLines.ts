@@ -8,9 +8,18 @@ export async function joinLines(editor: TextEditor, edit?: TextEditorEdit, {
 } = {}) {
 	const allSelectedLines: number[] = [];
 
-	for (const selection of editor.selections) {
-		for (let i = selection.start.line; i <= selection.end.line; i++) {
-			allSelectedLines.push(i);
+	if (editor.selections.length === 1 && editor.selection.isEmpty) {
+		// one single cursor - join active and next lines
+		allSelectedLines.push(editor.selection.active.line);
+		const nextLineNumber = editor.selection.active.line + 1;
+		if (nextLineNumber < editor.document.lineCount) {
+			allSelectedLines.push(nextLineNumber);
+		}
+	} else {
+		for (const selection of editor.selections) {
+			for (let i = selection.start.line; i <= selection.end.line; i++) {
+				allSelectedLines.push(i);
+			}
 		}
 	}
 
